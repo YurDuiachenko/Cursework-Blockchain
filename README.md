@@ -1,6 +1,6 @@
 # Cursework-Blockchain
-Репозиторий для курсовой работа по Блокчейну.
-Ход работы:
+## Репозиторий для курсовой работа по Блокчейну.
+## Ход работы:
 ![image](https://github.com/YurDuiachenko/Cursework-Blockchain/assets/72216941/70dba1f3-3275-4a91-9863-355747e2dc82)
 ![image](https://github.com/YurDuiachenko/Cursework-Blockchain/assets/72216941/08998a53-a98b-4db5-908c-dbf6f5c0273a)
 ![image](https://github.com/YurDuiachenko/Cursework-Blockchain/assets/72216941/3e3e1852-0066-45e8-8a71-7765503a1dd4)
@@ -10,6 +10,8 @@
 ![image](https://github.com/YurDuiachenko/Cursework-Blockchain/assets/72216941/19632857-d6cb-43de-a20e-98aa4c9167fe)
 ![image](https://github.com/YurDuiachenko/Cursework-Blockchain/assets/72216941/3f0f59f1-f3bd-400f-ad69-79b0b2dc7f81)
 ![image](https://github.com/YurDuiachenko/Cursework-Blockchain/assets/72216941/4151b932-e36b-4d49-a28a-2a2d143e0558)
+
+```html
 [
     {
         "index": 0,
@@ -30,7 +32,10 @@
         "nonce": 8931
     }
 ]
+```
 ![image](https://github.com/YurDuiachenko/Cursework-Blockchain/assets/72216941/968eb9e8-7d95-440d-a2b7-bb726137bb4c)
+
+```html
 [
     {
         "index": 0,
@@ -52,8 +57,9 @@
     }
 ]
 
+```
 Сигнатураной хэш функцией сделал сумма косинуса и кошинуса, а условие - чтобы с хэше встречалась комбинация "1234":
-
+```html
 var mineBlock = (blockData) => {
     var previousBlock = getLatestBlock();
     var nextIndex = previousBlock.index + 1;
@@ -76,8 +82,7 @@ var mineBlock = (blockData) => {
         return new Block(nextIndex, previousBlock.hash, nextTimestamp, blockData, nextHash, difficulty, nonce);
 }
 
-
-// Поменять хэш-функцию
 var calculateHash = (index, previousHash, timestamp, data, nonce) => {
     return Math.ceil(Math.cos(nonce)*10000+Math.cosh(nonce)*10000).toString();
 };
+```
