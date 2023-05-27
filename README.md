@@ -54,3 +54,30 @@
 
 Сигнатураной хэш функцией сделал сумма косинуса и кошинуса, а условие - чтобы с хэше встречалась комбинация "1234":
 
+var mineBlock = (blockData) => {
+    var previousBlock = getLatestBlock();
+    var nextIndex = previousBlock.index + 1;
+    var nonce = 0;
+    var nextTimestamp = new Date().getTime() / 1000;
+    var nextHash = calculateHash(nextIndex, previousBlock.hash, nextTimestamp, blockData, nonce);
+    while (nextHash.indexOf('1234') == -1){
+        nonce++;
+        nextTimestamp = new Date().getTime() / 1000;
+        nextHash = calculateHash(nextIndex, previousBlock.hash, 
+            nextTimestamp, blockData, nonce)
+            console.log("\"index\":" + nextIndex 
+            +",\"previousHash\":"+previousBlock.hash
+            +"\"timestamp\":"+nextTimestamp
+            +",\"data\":"+blockData
+            +",\x1b[33mhash: " + nextHash 
+            + " \x1b[0m," + "\"difficulty\":"+difficulty
+            +" \x1b[33mnonce: " + nonce + " \x1b[0m ");
+        }
+        return new Block(nextIndex, previousBlock.hash, nextTimestamp, blockData, nextHash, difficulty, nonce);
+}
+
+
+// Поменять хэш-функцию
+var calculateHash = (index, previousHash, timestamp, data, nonce) => {
+    return Math.ceil(Math.cos(nonce)*10000+Math.cosh(nonce)*10000).toString();
+};
