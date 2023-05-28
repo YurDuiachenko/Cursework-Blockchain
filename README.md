@@ -1,5 +1,5 @@
 # Cursework-Blockchain
-## Репозиторий для курсовой работа по Блокчейну.
+## Репозиторий для курсовой работы по Блокчейну.
 ## Ход работы:
 ![image](https://github.com/YurDuiachenko/Cursework-Blockchain/assets/72216941/70dba1f3-3275-4a91-9863-355747e2dc82)
 ![image](https://github.com/YurDuiachenko/Cursework-Blockchain/assets/72216941/08998a53-a98b-4db5-908c-dbf6f5c0273a)
