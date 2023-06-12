@@ -18,18 +18,24 @@
         "previousHash": "0",
         "timestamp": 1682839690,
         "data": "RUT-MIIT first block",
-        "hash": "8d9d5a7ff4a78042ea6737bf59c772f8ed27ef3c9b576eac1976c91aaf48d2de",
-        "difficulty": 0,
+        "hash": "1686576309",
         "nonce": 0
     },
     {
         "index": 1,
-        "previousHash": "8d9d5a7ff4a78042ea6737bf59c772f8ed27ef3c9b576eac1976c91aaf48d2de",
-        "timestamp": 1685195784.03,
-        "data": "Some data to the second block",
-        "hash": "0000c2421bab1ab3577b45092242a9f9c6cde25e379ce403526794f77ee4ac34",
-        "difficulty": 4,
-        "nonce": 8931
+        "previousHash": "1686576309",
+        "timestamp": 1686569967.343,
+        "data": "@Yu_Dio42",
+        "hash": "3464.123498497171",
+        "nonce": 258
+    },
+    {
+        "index": 2,
+        "previousHash": "3464.123498497171",
+        "timestamp": 1686570077.997,
+        "data": "Love MIIT",
+        "hash": "1234.9779000343653",
+        "nonce": 492
     }
 ]
 ```
@@ -42,28 +48,33 @@
         "previousHash": "0",
         "timestamp": 1682839690,
         "data": "RUT-MIIT first block",
-        "hash": "8d9d5a7ff4a78042ea6737bf59c772f8ed27ef3c9b576eac1976c91aaf48d2de",
-        "difficulty": 0,
+        "hash": "1686576309",
         "nonce": 0
     },
     {
         "index": 1,
-        "previousHash": "8d9d5a7ff4a78042ea6737bf59c772f8ed27ef3c9b576eac1976c91aaf48d2de",
-        "timestamp": 1685195784.03,
-        "data": "Some data to the second block",
-        "hash": "0000c2421bab1ab3577b45092242a9f9c6cde25e379ce403526794f77ee4ac34",
-        "difficulty": 4,
-        "nonce": 8931
+        "previousHash": "1686576309",
+        "timestamp": 1686569967.343,
+        "data": "@Yu_Dio42",
+        "hash": "3464.123498497171",
+        "nonce": 258
+    },
+    {
+        "index": 2,
+        "previousHash": "3464.123498497171",
+        "timestamp": 1686570077.997,
+        "data": "Love MIIT",
+        "hash": "1234.9779000343653",
+        "nonce": 492
     }
 ]
-
 ```
 Сигнатураной хэш функцией сделал сумма косинуса и кошинуса, а условие - чтобы с хэше встречалась комбинация "1234":
 ```html
 var mineBlock = (blockData) => {
     var previousBlock = getLatestBlock();
     var nextIndex = previousBlock.index + 1;
-    var nonce = 0;
+    var nonce = 1;
     var nextTimestamp = new Date().getTime() / 1000;
     var nextHash = calculateHash(nextIndex, previousBlock.hash, nextTimestamp, blockData, nonce);
     while (nextHash.indexOf('1234') == -1){
@@ -73,16 +84,26 @@ var mineBlock = (blockData) => {
             nextTimestamp, blockData, nonce)
             console.log("\"index\":" + nextIndex 
             +",\"previousHash\":"+previousBlock.hash
-            +"\"timestamp\":"+nextTimestamp
+            +",\"timestamp\":"+nextTimestamp
             +",\"data\":"+blockData
             +",\x1b[33mhash: " + nextHash 
-            + " \x1b[0m," + "\"difficulty\":"+difficulty
             +" \x1b[33mnonce: " + nonce + " \x1b[0m ");
         }
-        return new Block(nextIndex, previousBlock.hash, nextTimestamp, blockData, nextHash, difficulty, nonce);
+    return new Block(nextIndex, previousBlock.hash, nextTimestamp, blockData, nextHash, nonce);
 }
 
+
 var calculateHash = (index, previousHash, timestamp, data, nonce) => {
-    return Math.ceil(Math.cos(nonce)*10000+Math.cosh(nonce)*10000).toString();
+    var sum = 0;
+    for(var i = 0; i < data.length; i++){
+        sum += data[i].charCodeAt()+i
+    }
+    for(var i = 0; i < previousHash.length; i++){
+        sum += previousHash[i].charCodeAt()
+    }
+    var input = nonce + parseInt(sum)
+    return (Math.cos(parseInt(input))*(Math.round(timestamp*1000)%10000)).toString();
+
 };
+
 ```
